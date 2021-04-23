@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import subprocess
-from subprocess import Popen, CREATE_NEW_CONSOLE
+from subprocess import Popen
 import os
 import sys
  
@@ -46,9 +46,7 @@ def runVHDL(files, index, pathDir):
                     
                 try:
                     print("Starting GTKWave \n")
-                   # os.system('gnome-terminal -x gtkwave testbench' + "testbench" + str(index) +".vcd")
-                    subprocess.Popen("gtkwave testbench" + str(index) +".vcd", shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-                    #Popen(["gtkwave", "testbench" + str(index) +".vcd"], stderr=subprocess.STDOUT, shell=True) # GTKWave wird in einem
+                    Popen("gtkwave testbench" + str(index) +".vcd", shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
                 except subprocess.CalledProcessError:                                                                                # neuen Terminal geoeffnet
                     print("Starting GTKWave failed")
                     continue
@@ -64,6 +62,6 @@ def runVHDL(files, index, pathDir):
 sys.argv.pop(0)     # anpassen des Arrays der uebergebenen Datein
 files = sys.argv
 index = -1          
-pathDir = os.listdir() # speichern der Elemente im ausführenden Verzeichnis
+pathDir = os.listdir('./') # speichern der Elemente im ausführenden Verzeichnis
 
 runVHDL(files, index, pathDir) # ausführen der Funktion 
