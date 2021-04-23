@@ -46,7 +46,9 @@ def runVHDL(files, index, pathDir):
                     
                 try:
                     print("Starting GTKWave \n")
-                    Popen(["gtkwave", "testbench" + str(index) +".vcd"], stderr=subprocess.STDOUT, creationflags=CREATE_NEW_CONSOLE) # GTKWave wird in einem
+                   # os.system('gnome-terminal -x gtkwave testbench' + "testbench" + str(index) +".vcd")
+                    subprocess.Popen("gtkwave testbench" + str(index) +".vcd", shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+                    #Popen(["gtkwave", "testbench" + str(index) +".vcd"], stderr=subprocess.STDOUT, shell=True) # GTKWave wird in einem
                 except subprocess.CalledProcessError:                                                                                # neuen Terminal geoeffnet
                     print("Starting GTKWave failed")
                     continue
